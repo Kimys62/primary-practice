@@ -1,0 +1,25 @@
+{{>layouts/header}}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">id</th>
+        <th scope="col">title</th>
+        <th scope="col">content</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{#articleList}} <!-- 이 간격안에서 articleList을 사용가능-->
+        <!-- 이렇게 묶여있을 때는 안쪽에 데이터를 반복시켜준다 -->
+    <tr>
+        <td>{{id}}</td>
+        <td><a href="/articles/{{id}}">{{title}}</a></td>
+        <td>{{content}}</td>
+    </tr>
+    {{/articleList}}
+    </tbody>
+</table>
+
+<a href="/articles/view">new Article</a>
+
+{{>layouts/footer}}

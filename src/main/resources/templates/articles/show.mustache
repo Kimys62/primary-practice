@@ -1,0 +1,24 @@
+{{>layouts/header}}
+<!-- articles의 id값 (1,2,3,...)형식으로 입력 예 localhost:8080/articles/2 -->
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">id</th>
+        <th scope="col">title</th>
+        <th scope="col">content</th>
+    </tr>
+    </thead>
+    <tbody>
+        {{#article}} <!-- 이 간격안에서 article을 사용가능-->
+    <tr>
+        <td>{{id}}</td>
+        <td>{{title}}</td>
+        <td>{{content}}</td>
+    </tr>
+        {{/article}}
+    </tbody>
+</table>
+<a href="/articles/{{article.id}}/edit" class="btn btn-primary">Edit</a>
+<a href="/articles/{{article.id}}/delete" class="btn btn-primary">delete</a>
+<a href="/articles">Go to ArticleList</a>
+{{>layouts/footer}}

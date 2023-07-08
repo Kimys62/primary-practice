@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>client</title>
+    <style>
+        #text-box {
+            width: 600px; height: 650px;
+            border: 2px solid black;
+            position: absolute;
+            top: 155px;
+            left: 610px;
+        }
+    </style>
+</head>
+<body>
+    <!--여기를 textarea로 바꿔보기-->
+    <!-- onkeydown="if(window.event.keyCode===13){send()}" 사용시 엔터키 이벤트 -->
+    <div id="text-box">
+        <form>
+            <span id="text"><input type="text" id="message" class="content" maxlength="20" style="width: 580px;height: 30px; font-size: 30px;"autofocus>
+            <input type="button" onclick="sendMessage()"></input></span>
+        </form>
+    </div>
+    <script>
+        let webSocket = new WebSocket("ws://localhost:8080/red_mafia");
+
+        webSocket.onopen = function () {
+            alert('입장');
+        };
+
+        webSocket.onmessage = function (web) {
+            let textbox = document.querySelector('#text-box');
+            let message = document.createElement('p');
+            message.innerText = web.data;
+            textbox.append(message);
+
+        };
+
+        function send() {
+            /* content 클래스의 값을 가져옴 */
+            let content = document.querySelector('.content').value;
+            webSocket.send(content);
+
+        };
+
+        webSocket.onclose = function (web) {
+            /* webSocket.close() 메서드는 웹소켓의 연결 또는 연결시도를 닫아버림 닫혀있으면 아무 작업안함*/
+            console.log(web);
+            webSocket.close();
+        };
+
+        function sendMessage() {
+            var message = document.getElementById('message');
+            var textBox = document.getElementById('text-box');
+
+            textBox.value += message.value;
+            webSocket.send(message.value);
+            message.value = "";
+
+        }
+    </script>
+</body>
+</html>

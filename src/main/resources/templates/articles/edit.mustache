@@ -1,0 +1,21 @@
+{{>layouts/header}}
+
+<!-- form태그는 get과 post만 지원 -->
+{{#article}}
+<form class="container" action="/articles/update" method="post">
+    <input name="id" type="hidden" value="{{id}}"/>
+    <div class="mb-3">
+        <label class="form-label">제목</label>
+        <input type="text" class="form-control" name="title" value="{{title}}"><!-- name에 변수명 입력해야 값을 받아옴 -->
+    </div>
+    <div class="mb-3">
+        <label class="form-label">내용</label>
+        <textarea class="form-control" rows="3" name="content" value="{{content}}"></textarea><!-- name에 변수명 입력해야 값을 받아옴 -->
+
+    </div>
+
+    <button type="submit" class="btn btn-primary">제출</button>
+    <a href="/articles/{{id}}">back</a>
+</form>
+{{/article}}
+{{>layouts/footer}}
